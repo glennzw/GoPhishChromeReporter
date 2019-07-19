@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <!--<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="./static/favicon.ico">
+
+    <title>GoPhish Settings</title>
+
+    <link href="./static/bootstrap.min.css" rel="stylesheet">
+
+    <link href="./static/floating-labels.css" rel="stylesheet">
+    <script src="./static/jquery.min.js"></script>
+
+    <script src="./static/popup.js"></script>
+
+  </head>
+
+  <body style="height:504;min-width:620px;">
+        <form class="form-signin" id="target"> 
+      <div class="text-center mb-4">
+        <img class="mb-4" src="./static/icon128.png" alt="" width="72" height="72">
+        <h1 class="h3 mb-3 font-weight-normal">GoPhish Email Reporter Settings</h1>
+      </div>
+
+      <div id="inputs">
+      <div class="form-label-group">
+        <input type="text" id="server" class="form-control" placeholder="GoPhish Server" required autofocus>
+        <label for="server">Enter your GoPhish Server</label>
+      </div>
+
+      <div class="form-label-group">    
+        <input type="email" id="inputEmail" class="form-control" placeholder="Email address" autofocus>
+        <label for="inputEmail">Enter your IT Phishing Email address (optional)</label>
+      </div>
+
+      <button class="btn btn-lg btn-primary btn-block" type="submit">Save Settings</button>
+    </div>
+
+      <p class="mt-5 mb-3 text-muted text-center">&copy; <a href="getgophish.com">GoPhish</a><br> Plugin by <a href="https://twitter.com/glennzw"> Glenn  </p>
+    </form>
+  </body>
+</html>

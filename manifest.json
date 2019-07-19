@@ -1,0 +1,40 @@
+{
+  "name": "GoPhish Email Reporter",
+  "description": "Report suspicious emails to GoPhish.",
+  "version": "0.0.1",
+
+  "web_accessible_resources": [
+    "static/*.gif"
+  ],
+
+  "browser_action": {
+    "default_icon": "icon128.png",
+    "default_popup": "options.html",
+	 "default_title": "GoPhish!"
+  },
+
+  "content_scripts": [
+    {
+      "matches": [
+        "https://mail.google.com/*",
+        "https://inbox.google.com/*"
+      ],
+      "js": ["inboxsdk.js","content.js", "gmail.js", "jquery.min.js"],
+      "run_at": "document_end"
+    }
+  ],
+  "permissions": [
+    "activeTab",
+    "storage",
+    "https://*.google.com/*",
+    "https://ssl.gstatic.com/",
+    "https://www.googleapis.com/",
+    "https://accounts.google.com/",
+    "https://mail.google.com/",
+    "https://inbox.google.com/"
+  ],
+  "icons": { "16": "icon16.png",
+           "48": "icon48.png",
+          "128": "icon128.png" },
+  "manifest_version": 2
+}
