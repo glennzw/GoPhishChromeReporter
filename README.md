@@ -25,6 +25,7 @@ If you skip the configuration the tool will prompt you when trying to report an 
 
 ## Usage
 Click the GoPhish icon in the GMail toolbar when viewing an email. If the email is indeed a GoPhish capaign the user will be congratulated:
+
 ![](readmefiles/report01.gif)
 
 If, however, the email is not a GoPhish campaign the user will be given the option to report the email to their IT department (as per the email address set in the confifguration).
