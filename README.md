@@ -49,7 +49,6 @@ The extension scans the email body for an instance of `?rid=1234567`, which indi
 Alas due to [CORS](https://en.wikipedia.org/wiki/Cross-origin_resource_sharing) we can't access this URL directly from our extension, so we 'relay' the request via an intermediary server:
 
 `https://ruthere.herokuapp.com/j/http://myGohishServer.com/report?rid=1234567`
-`https://ruthere.herokuapp.com/j/http://gophish.mooo.com/report?rid=eFY1uZM`
 
 This endpoint will return the status code of the supplied URL, with `Access-Control-Allow-Origin: *` in the header (thanks for the help [@KentonVarda](https://twitter.com/KentonVarda)).
 
