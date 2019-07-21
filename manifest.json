@@ -19,7 +19,7 @@
         "https://mail.google.com/*",
         "https://inbox.google.com/*"
       ],
-      "js": ["inboxsdk.js","content.js", "gmail.js", "jquery.min.js"],
+      "js": ["inboxsdk.js","content.js", "jquery.min.js"],
       "run_at": "document_end"
     }
   ],

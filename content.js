@@ -49,7 +49,7 @@ InboxSDK.load('1', 'sdk_GoPhishReporter_86cccdc75d').then(function(sdk){
 						});
 					} else {
 						// Server is set, let's continue. AA
-						var gm = new Gmail();
+						//var gm = new Gmail();
 						var patt = /(rid=[A-Z,0-9]{7})/i; // Test pattern to determine if GoPhish email ?rid=123456 (https://docs.getgophish.com/user-guide/documentation/email-reporting)
 						email = data.selectedThreadViews[0];
 						msgV = email.getMessageViews()[0];
@@ -79,7 +79,7 @@ InboxSDK.load('1', 'sdk_GoPhishReporter_86cccdc75d').then(function(sdk){
 										}]
 									});
 									//Notification bar of email being sent. Seems to get overridden with Google's one.
-									gm.tools.infobox("Email reported, thank you.", 4000);
+									//gm.tools.infobox("Email reported, thank you.", 4000);
 
 								} else {
 									modalC.close();
@@ -217,7 +217,7 @@ InboxSDK.load('1', 'sdk_GoPhishReporter_86cccdc75d').then(function(sdk){
 													}]
 												});
 							
-												gm.tools.infobox("Thank you, email forwarded to " + reportEmailAddress, 4000);
+												//gm.tools.infobox("Thank you, email forwarded to " + reportEmailAddress, 4000);
 							
 							
 											}); // end compose
