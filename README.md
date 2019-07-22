@@ -46,11 +46,7 @@ The extension scans the email body for an instance of `?rid=1234567`, which indi
 
 `http://phish_server/report?rid=1234567`
 
-Alas due to [CORS](https://en.wikipedia.org/wiki/Cross-origin_resource_sharing) we can't access this URL directly from our extension, so we 'relay' the request via an intermediary server:
-
-`https://ruthere.herokuapp.com/j/http://myGohishServer.com/report?rid=1234567`
-
-This endpoint will return the status code of the supplied URL, with `Access-Control-Allow-Origin: *` in the header (thanks for the help [@KentonVarda](https://twitter.com/KentonVarda)).
+Originally, due to CORS we relayed report requests via an intermediary server but the GoPhish developers kindly offered to set `Access-Control-Allow-Origin: *` on the report endpoint. In order to handle Mixed-Content errors in the case where the GoPhish server is non-https we send the request via a background script, using [Chrome Message Passing](https://developer.chrome.com/extensions/messaging).
 
 If the email is determined *not* to be from GoPhish, the user is prompted to send it to their IT department. This works by creating a new email and inserting the phishing email's HTML directly into it, and 'faking' a Forward header at the top from the other email attributes. This is done via [InboxSDK](https://www.inboxsdk.com/).
 
@@ -59,9 +55,10 @@ The settings between the Configuration popup and the GMail page are saved and sh
 
 ## Built With
 
-* [InboxSDK](https://www.inboxsdk.com/) - High level Javascript library for building extensions
+* [Chrome Extensions](https://developer.chrome.com/extensions/) - Allows us to programatically interact with the browser
+* [Chrome Message Passing](https://developer.chrome.com/extensions/messaging) - Communication between extension elements and pages
+* [InboxSDK](https://www.inboxsdk.com/) - High level Javascript library for building Chrome extensions
 * [jQuery](https://jquery.com/) - JavaScript library for HTML DOM tree traversal and manipulation
-* [Heroku](https://www.heroku.com) - Cloud platform as a service
 
 ## Notes
 

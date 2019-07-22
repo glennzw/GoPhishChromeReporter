@@ -3,6 +3,14 @@ Flush settings:
 		localStorage.removeItem("GoPhishServer");
 		localStorage.removeItem("reportEmailAddress");
 */
+/*
+chrome.runtime.onInstalled.addListener(function() {
+	chrome.contextMenus.create({
+	  "id": "jolgkimmecfjfbfagnbjieimcbnjbmgm",
+	  "title": "Sample Context Menu",
+	  "contexts": ["selection"]
+	});
+	});	*/
 
 popUpMin = 1000; // Minimum amount of time for the "Reporting" popup to be displayed.
 endPoint = "https://ruthere.herokuapp.com/j/" //Relay for checking GoPhish report URL
@@ -57,13 +65,10 @@ InboxSDK.load('1', 'sdk_GoPhishReporter_86cccdc75d').then(function(sdk){
 						var phishy = patt.exec(emailBody);
 						if (phishy != null) {
 							reportURL = GoPhishServer.concat("report?", phishy[0]);
-							//reportURL = reportURL + ";;" + randstring(5); //Hack to avoid cache'd GETs. GoPhish ignores the ;;.*
 				
-							//We need to get the returned status code, but CORS blocks us querying it directly.
-							console.log(endPoint + reportURL);
-							$.getJSON(endPoint + reportURL, function(data) {
-								var status = `${data.status}`;
-								console.log("Status: " + status);
+							//We get around Mixed-Content of reporting to a non-https GoPhish server by sending the request from a background page
+							chrome.runtime.sendMessage({url: reportURL}, function(response) {
+								var status = response.status;
 								if (status == "204") { //Phish
 									modalC.close();
 									var modal = sdk.Widgets.showModalView({
@@ -81,7 +86,7 @@ InboxSDK.load('1', 'sdk_GoPhishReporter_86cccdc75d').then(function(sdk){
 									//Notification bar of email being sent. Seems to get overridden with Google's one.
 									//gm.tools.infobox("Email reported, thank you.", 4000);
 
-								} else {
+								} else { // Reporting failed
 									modalC.close();
 									var modal = sdk.Widgets.showModalView({
 										title: 'Unable to Report Phish!',
@@ -96,49 +101,8 @@ InboxSDK.load('1', 'sdk_GoPhishReporter_86cccdc75d').then(function(sdk){
 										}]
 									});
 								}
-									  
-								
-							});
-``
-							/*
-							// Alternative method to query phish server response code, via image dimensions
-							var newImg = new Image;
-							newImg.src = "http://ruthere.local:9000/u/" + reportURL;
-							newImg.onload = function(){
-								if (newImg.height == 204) { //204 succeed	
-									modalC.close();
-									var modal = sdk.Widgets.showModalView({
-										title: 'Phishing Campaign Reported!',
-										'el': `<div id="email-popup">This was a GoPhish training simulation and you passed the test.<p><b><center>Bravo!</b> 🎉</center></div>`,
-										buttons: [{
-											text: 'OK',
-											title: 'Thanks, bye.',
-											type:  'PRIMARY_ACTION',
-											onClick: function() {
-												modal.close();
-											}
-										}]
-									});
-									//Notification bar of email being sent. Seems to get overridden with Google's one.
-									gm.tools.infobox("Email reported, thank you.", 4000);
-								} else {
-									modalC.close();
-									var modal = sdk.Widgets.showModalView({
-										title: 'Unable to Report Phish!',
-										'el': `<div id="email-popup">This appears to be a training simulation email, but reporting it failed.<br>Perhaps your GoPhish server (<a href="` + GoPhishServer + `">`+GoPhishServer+`</a>) is incorrectly set?</div>`,
-										buttons: [{
-											text: 'OK',
-											title: 'OK, close window',
-											type:  'PRIMARY_ACTION',
-											onClick: function() {
-												modal.close();
-											}
-										}]
-									});
-								}
-							}
-							*/
-						} else { //else BB
+							  });
+						} else { //else not a GoPhish email (BB)
 				
 							modalC.close();
 

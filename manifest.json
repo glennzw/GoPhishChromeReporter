@@ -1,7 +1,7 @@
 {
   "name": "GoPhish Email Reporter",
   "description": "Report suspicious emails to GoPhish.",
-  "version": "0.0.2",
+  "version": "0.0.3",
 
   "web_accessible_resources": [
     "static/*.gif"
@@ -11,6 +11,11 @@
     "default_icon": "icon128.png",
     "default_popup": "options.html",
 	 "default_title": "GoPhish!"
+  },
+
+  "background": {
+    "scripts": ["report.js"],
+    "persistent": false
   },
 
   "content_scripts": [
