@@ -60,10 +60,8 @@ The settings between the Configuration popup and the GMail page are saved and sh
 ## Built With
 
 * [InboxSDK](https://www.inboxsdk.com/) - High level Javascript library for building extensions
-* [GMail.js](https://github.com/KartikTalwar/gmail.js/tree/master) - Library for creating WebExtension-based browser-extensions    
 * [jQuery](https://jquery.com/) - JavaScript library for HTML DOM tree traversal and manipulation
 * [Heroku](https://www.heroku.com) - Cloud platform as a service
-* [CloudFlare Workers](https://workers.dev/) - Deploying serverless code
 
 ## Notes
 
